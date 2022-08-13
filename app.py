@@ -81,21 +81,21 @@ data = pd.read_csv('http://fantasyoverlord.com/FPL/DataWithForecasts',encoding='
 
 #Top players untile this GW [Total]
 st.header('Top Players in all the fantasy')
-st.write(data.sort_values(by=['TotalPoints'],ascending=False)[data.columns[:(data.columns.get_indexer(['NextFixture5'])+2)[0]]].head(50))
+st.write(data.sort_values(by=['TotalPoints'],ascending=False,ignore_index=True)[data.columns[:(data.columns.get_indexer(['NextFixture5'])+2)[0]]].head(50))
 
 #Top palyer in the last GW
 st.header('Top Players in the Last Weak')
-st.write(data.sort_values(by=['PointsLastRound'],ascending=False)[data.columns[:(data.columns.get_indexer(['NextFixture5'])+2)[0]]].head(50))
+st.write(data.sort_values(by=['PointsLastRound'],ascending=False,ignore_index=True)[data.columns[:(data.columns.get_indexer(['NextFixture5'])+2)[0]]].head(50))
 
 #Top selected Plyers
 st.header('Top Players Selected by Users')
-st.write(data.sort_values(by=['SelectedByPercent'],ascending=False)[data.columns[:(data.columns.get_indexer(['NextFixture5'])+2)[0]]].head(50))
+st.write(data.sort_values(by=['SelectedByPercent'],ascending=False,ignore_index=True)[data.columns[:(data.columns.get_indexer(['NextFixture5'])+2)[0]]].head(50))
 
 # Forcasting
 st.header('Forcasting The Top Players for the Next Week ')
-st.write(data.sort_values(by=[data.columns[(data.columns.get_indexer(['NextFixture5'])+1)][0]],ascending=False)[data.columns[:(data.columns.get_indexer(['NextFixture5'])+2)[0]]].head(50))
+st.write(data.sort_values(by=[data.columns[(data.columns.get_indexer(['NextFixture5'])+1)][0]],ascending=False,ignore_index=True)[data.columns[:(data.columns.get_indexer(['NextFixture5'])+2)[0]]].head(50))
 
 # Get data for selected players
 st.header('Search for Players You Want')
 player = st.multiselect("Select playres:",data['Surname'])
-st.write(data[data['Surname'].isin(player)][data.columns[:(data.columns.get_indexer(['NextFixture5'])+2)[0]]])
+st.write(data[data['Surname'].isin(player)][['FirstName','Surname',data.columns[(data.columns.get_indexer(['NextFixture5'])+1)[0]]]].reset_index(drop=True))
