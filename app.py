@@ -95,7 +95,24 @@ st.write(data.sort_values(by=['SelectedByPercent'],ascending=False,ignore_index=
 st.header('Forcasting The Top Players for the Next Week ')
 st.write(data.sort_values(by=[data.columns[(data.columns.get_indexer(['NextFixture5'])+1)][0]],ascending=False,ignore_index=True)[['FirstName','Surname',data.columns[(data.columns.get_indexer(['NextFixture5'])+1)[0]]]].head(50))
 
+#Get the top GK players
+st.markdown('Top Players in GKL')
+st.write(data[data.PositionsList == 'GLK'].sort_values(by=[data.columns[(data.columns.get_indexer(['NextFixture5'])+1)][0]],ascending=False,ignore_index=True)[['FirstName','Surname','Cost',data.columns[(data.columns.get_indexer(['NextFixture5'])+1)[0]]]].head(20))
+
+#Get top def players
+st.markdown('Top Players in DEF')
+st.write(data[data.PositionsList == 'DEF'].sort_values(by=[data.columns[(data.columns.get_indexer(['NextFixture5'])+1)][0]],ascending=False,ignore_index=True)[['FirstName','Surname','Cost',data.columns[(data.columns.get_indexer(['NextFixture5'])+1)[0]]]].head(20))
+
+#get top MED players
+st.markdown('Top Players in MID')
+st.write(data[data.PositionsList == 'MID'].sort_values(by=[data.columns[(data.columns.get_indexer(['NextFixture5'])+1)][0]],ascending=False,ignore_index=True)[['FirstName','Surname','Cost',data.columns[(data.columns.get_indexer(['NextFixture5'])+1)[0]]]].head(20))
+
+#get top ATK players
+st.markdown('Top Players in FWD')
+st.write(data[data.PositionsList == 'FWD'].sort_values(by=[data.columns[(data.columns.get_indexer(['NextFixture5'])+1)][0]],ascending=False,ignore_index=True)[['FirstName','Surname','Cost',data.columns[(data.columns.get_indexer(['NextFixture5'])+1)[0]]]].head(20))
+
 # Get data for selected players
 st.header('Search for Players You Want')
 player = st.multiselect("Select playres:",data['Surname'])
-st.write(data[data['Surname'].isin(player)][data.columns[:(data.columns.get_indexer(['NextFixture5'])+2)[0]]].reset_index(drop=True))
+if player != []:
+    st.write(data[data['Surname'].isin(player)][data.columns[:(data.columns.get_indexer(['NextFixture5'])+2)[0]]].reset_index(drop=True))
