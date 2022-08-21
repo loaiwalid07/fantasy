@@ -116,6 +116,7 @@ data['team'] = data.team.map(teams_df.set_index('id').name)
 data['value'] = data.value_season.astype(float)
 data['ict_index'] = data.ict_index.astype(float)
 data['selected_by_percent'] = data.selected_by_percent.astype(float)
+data["now_cost"] = data['now_cost']*0.1
 
 
 #cols = ['FirstName', 'Surname', 'PositionsList', 'Team', 'Cost','PointsLastRound']
@@ -210,6 +211,7 @@ if player != []:
 #Plot comparson between fixtures
 st.header('Fixtures Analysis')
 for i in range(len(fixture_df.iloc[:10])):
+    
     labels = ['Overall','Attack','Defence']
     
     h_name = teams_df['name'][teams_df['id'] == fixture_df['team_h'].iloc[i]].values[0]
@@ -226,6 +228,8 @@ for i in range(len(fixture_df.iloc[:10])):
         go.Bar(name=a_name, x=labels, y=a)
     ])
     # Change the bar mode
+    fig.layout.xaxis.fixedrange = True
+    fig.layout.yaxis.fixedrange = True
     fig.update_layout(barmode='group',title_text= h_name+' VS '+a_name )
     st.write(fig)
 
