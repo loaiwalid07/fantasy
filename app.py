@@ -232,6 +232,7 @@ for i in range(len(fixture_df.iloc[:10])):
     fig.layout.yaxis.fixedrange = True
     fig.layout.plot_bgcolor='rgba(0,0,0,0)'
     fig.layout.paper_bgcolor = 'rgba(0, 0, 0, 0)'
+    fig.update_yaxes(visible=False)
     fig.update_layout(barmode='group',title_text= '[ ' + h_name+' VS '+a_name + ' ]',xaxis=dict(showgrid=False),
               yaxis=dict(showgrid=False))
     st.write(fig)
